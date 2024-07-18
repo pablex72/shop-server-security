@@ -13,7 +13,10 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody @Valid AuthenticationRequest authenticationRequest){
-        return null;
+
+        AuthenticationResponse jwtDto = authenticationService.login(authenticationRequest);
+
+        return ResponseEntity.ok(jwtDto);
     }
 
     @GetMapping("/public-access")
