@@ -23,9 +23,9 @@ public class SecurityBeansInjector {
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(); //setear el dao acceso bd
-        provider.setUserDetailsService(null); //setaer el encoder para comparar contrase
-
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(null); //setear el dao acceso bd
+        provider.setPasswordEncoder(); // setaer el encoder para comparar contrase
     }
 
 }
