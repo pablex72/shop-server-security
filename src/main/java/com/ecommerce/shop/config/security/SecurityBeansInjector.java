@@ -20,9 +20,9 @@ public class SecurityBeansInjector {
 //    @Autowired
 //    public AuthenticationConfiguration authenticationConfiguration;
 
-//    // o inyectar a traves del metodo
-//    @Autowired
-//    private UserRepository userRepository;
+    // o inyectar a traves del metodo
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -32,8 +32,8 @@ public class SecurityBeansInjector {
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(null); //setear el dao acceso bd
-        provider.setPasswordEncoder(); // setaer el encoder para comparar contrase
+        provider.setUserDetailsService(userDetailsService()); //setear el dao acceso bd
+        provider.setPasswordEncoder(passwordEncoder()); // setaer el encoder para comparar contrase
         return provider;
     }
 
@@ -43,7 +43,7 @@ public class SecurityBeansInjector {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository){
+    public UserDetailsService userDetailsService(){
         return username -> {
             return userRepository.findByUsername(username)
                     .orElseThrow(()-> new RuntimeException("User not found"));
