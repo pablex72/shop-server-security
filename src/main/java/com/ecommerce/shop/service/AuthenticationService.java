@@ -9,6 +9,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthenticationService {
 
@@ -17,6 +20,9 @@ public class AuthenticationService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JwtService jwtService;
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
@@ -32,5 +38,9 @@ public class AuthenticationService {
     }
 
     private Map<String,Object> generateExtraClaims(User user) {
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("name", user.getName());
+        extraClaims.put("role", user.getRole().name());
+        return extraClaims;
     }
 }
