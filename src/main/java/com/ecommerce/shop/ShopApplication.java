@@ -17,11 +17,11 @@ public class ShopApplication {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-//	@Bean
-//	public CommandLineRunner createPasswordCommand(){
-//		return args -> {
-//			System.out.println(passwordEncoder.encode("clave123"));
-//			System.out.println(passwordEncoder.encode("clave456"));
-//		};
-//	}
+	@Bean
+	public CommandLineRunner createPasswordCommand(){
+		return args -> {
+			System.out.println(passwordEncoder.encode("clave123"));
+			System.out.println(passwordEncoder.encode("clave456"));
+		};
+	}
 }
